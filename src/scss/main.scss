@@ -1,0 +1,288 @@
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500;600;700;800;900&display=swap");
+
+*,
+*::before,
+*::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+$font: "Poppins", sans-serif;
+$para-clr: #3e3d3d;
+$margin-bottom: 0.8rem;
+$font-s: 1.2rem;
+$font-s-tab: 0.9rem;
+
+@mixin for-desktop-up {
+  @media (max-width: 1100px) {
+    @content;
+  }
+}
+
+@mixin for-tablet-landscape-up {
+  @media (max-width: 995px) {
+    @content;
+  }
+}
+
+@mixin for-tablet-portrait-up {
+  @media (max-width: 913px) {
+    @content;
+  }
+}
+
+@mixin small-tablets {
+  @media (max-width: 650px) {
+    @content;
+  }
+}
+
+@mixin mobile-phones {
+  @media (max-width: 500px) {
+    @content;
+  }
+}
+
+@mixin width {
+  width: 75%;
+  margin: 0 auto;
+  @include for-desktop-up {
+    width: 85%;
+  }
+  @include for-tablet-landscape-up {
+    width: 90%;
+  }
+}
+
+@mixin flex($justify) {
+  display: flex;
+  align-items: center;
+  justify-content: $justify;
+}
+
+.main-container {
+  background-image: url("../../Assets/Background.png");
+  background-position: center;
+  background-size: cover;
+}
+
+.width-holder {
+  @include width();
+}
+
+// navbar
+
+.navbar {
+  @include flex(space-between);
+  font-family: $font;
+  padding: 1.4em 0 2.3em 0;
+  @include mobile-phones {
+    position: relative;
+  }
+
+  .nav-list.active {
+    clip-path: circle(215% at top right);
+  }
+
+  .nav-list {
+    @include flex(center);
+
+    @include mobile-phones {
+      position: absolute;
+      top: 100%;
+      right: 0;
+      flex-direction: column;
+      background-color: #fff;
+      padding: 1em;
+      border-radius: 4px;
+      clip-path: circle(0% at top right);
+      transition: clip-path 750ms ease-in-out;
+    }
+
+    li {
+      list-style: none;
+      margin-left: 1em;
+      @include mobile-phones {
+        margin: 0;
+        width: 100%;
+        text-align: center;
+      }
+
+      .start-btn {
+        color: #fff;
+      }
+
+      a {
+        text-decoration: none;
+        color: $para-clr;
+        @include mobile-phones {
+          display: block;
+          padding: 1em;
+        }
+      }
+    }
+  }
+
+  .hamburger {
+    display: none;
+    @include mobile-phones {
+      display: block;
+      cursor: pointer;
+    }
+  }
+}
+
+.start-btn {
+  text-decoration: none;
+  display: inline-block;
+  color: #fff;
+  background: #000;
+  padding: 0.7em 1em;
+  border-radius: 4px;
+
+  span {
+    color: #afb0b0;
+  }
+}
+
+// heading para container
+
+.heading-para-container {
+  font-family: $font;
+  text-align: center;
+  @include width();
+  margin-bottom: 4rem;
+
+  h1 {
+    font-size: 3.5rem;
+    margin-bottom: $margin-bottom;
+    @include for-tablet-portrait-up {
+      font-size: 2.5rem;
+    }
+  }
+
+  p {
+    color: $para-clr;
+    font-size: $font-s;
+    margin-bottom: $margin-bottom;
+    @include for-tablet-portrait-up {
+      font-size: $font-s-tab;
+    }
+  }
+
+  .start-btn {
+    margin-bottom: $margin-bottom;
+
+    @include mobile-phones {
+      display: block;
+    }
+  }
+}
+
+// snippet image
+
+.img-container {
+  width: 100%;
+
+  img {
+    display: block;
+    width: 100%;
+  }
+}
+
+// grid-container
+
+.grid-container {
+  display: grid;
+  grid-template-columns: 55% 45%;
+  padding: 4em 0;
+  gap: 3em;
+  @include for-tablet-portrait-up {
+    gap: 0;
+  }
+
+  @include small-tablets {
+    grid-template-areas:
+      "imgcontainer"
+      "txtcontainer";
+
+    grid-template-columns: 1fr;
+    gap: 3em;
+  }
+  place-items: center;
+  font-family: $font;
+
+  .txt-container {
+    h2 {
+      font-size: 2.2rem;
+      @include for-tablet-portrait-up {
+        font-size: 1.4rem;
+      }
+      @include small-tablets {
+        font-size: 2.3rem;
+      }
+      margin-bottom: $margin-bottom;
+
+      @include mobile-phones {
+        font-size: 2.1rem;
+      }
+    }
+
+    p {
+      color: $para-clr;
+      font-size: $font-s;
+      @include for-tablet-portrait-up {
+        font-size: $font-s-tab;
+      }
+      margin-bottom: $margin-bottom;
+    }
+
+    @include small-tablets {
+      grid-area: txtcontainer;
+    }
+  }
+
+  .img-container {
+    @include small-tablets {
+      width: 70%;
+      grid-area: imgcontainer;
+    }
+  }
+}
+
+// footer
+
+.footer {
+  @include flex(space-between);
+  font-family: $font;
+  padding-bottom: 3em;
+
+  @include mobile-phones {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  ul {
+    @include flex(center);
+    list-style: none;
+
+    li {
+      margin-left: 1em;
+      @include mobile-phones {
+        margin: 0 1em 0 0;
+      }
+
+      a {
+        text-decoration: none;
+        color: $para-clr;
+      }
+    }
+  }
+
+  img {
+    @include mobile-phones {
+      margin-bottom: $margin-bottom;
+    }
+  }
+}
